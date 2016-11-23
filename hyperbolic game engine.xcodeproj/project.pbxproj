@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		1C4F14E41DD2E34B006FF2CF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14E31DD2E34B006FF2CF /* main.cpp */; };
+		1C4F15071DD2E42D006FF2CF /* DMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14EC1DD2E42D006FF2CF /* DMatrix.cpp */; };
+		1C4F15091DD2E42D006FF2CF /* DVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14EF1DD2E42D006FF2CF /* DVector.cpp */; };
+		1C4F150B1DD2E42D006FF2CF /* HCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14F21DD2E42D006FF2CF /* HCell.cpp */; };
+		1C4F150D1DD2E42D006FF2CF /* HMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14F71DD2E42D006FF2CF /* HMatrix.cpp */; };
+		1C4F150F1DD2E42D006FF2CF /* HPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14FA1DD2E42D006FF2CF /* HPoint.cpp */; };
+		1C4F15111DD2E42D006FF2CF /* HPosition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14FD1DD2E42D006FF2CF /* HPosition.cpp */; };
+		1C4F15131DD2E42D006FF2CF /* HVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F15001DD2E42D006FF2CF /* HVector.cpp */; };
+		1C4F151A1DD2E761006FF2CF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4F15191DD2E761006FF2CF /* OpenGL.framework */; };
+		1C4F151C1DD2E76A006FF2CF /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4F151B1DD2E76A006FF2CF /* GLUT.framework */; };
+		1C4F151E1DD2E78D006FF2CF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4F151D1DD2E78D006FF2CF /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +35,24 @@
 /* Begin PBXFileReference section */
 		1C4F14E01DD2E34B006FF2CF /* hyperbolic game engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "hyperbolic game engine"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C4F14E31DD2E34B006FF2CF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		1C4F14EC1DD2E42D006FF2CF /* DMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DMatrix.cpp; sourceTree = "<group>"; };
+		1C4F14ED1DD2E42D006FF2CF /* DMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMatrix.h; sourceTree = "<group>"; };
+		1C4F14EF1DD2E42D006FF2CF /* DVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DVector.cpp; sourceTree = "<group>"; };
+		1C4F14F01DD2E42D006FF2CF /* DVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVector.h; sourceTree = "<group>"; };
+		1C4F14F21DD2E42D006FF2CF /* HCell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HCell.cpp; sourceTree = "<group>"; };
+		1C4F14F31DD2E42D006FF2CF /* HCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCell.h; sourceTree = "<group>"; };
+		1C4F14F51DD2E42D006FF2CF /* HGE UML Diagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HGE UML Diagram.png"; sourceTree = "<group>"; };
+		1C4F14F71DD2E42D006FF2CF /* HMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HMatrix.cpp; sourceTree = "<group>"; };
+		1C4F14F81DD2E42D006FF2CF /* HMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMatrix.h; sourceTree = "<group>"; };
+		1C4F14FA1DD2E42D006FF2CF /* HPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HPoint.cpp; sourceTree = "<group>"; };
+		1C4F14FB1DD2E42D006FF2CF /* HPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPoint.h; sourceTree = "<group>"; };
+		1C4F14FD1DD2E42D006FF2CF /* HPosition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HPosition.cpp; sourceTree = "<group>"; };
+		1C4F14FE1DD2E42D006FF2CF /* HPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPosition.h; sourceTree = "<group>"; };
+		1C4F15001DD2E42D006FF2CF /* HVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HVector.cpp; sourceTree = "<group>"; };
+		1C4F15011DD2E42D006FF2CF /* HVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HVector.h; sourceTree = "<group>"; };
+		1C4F15191DD2E761006FF2CF /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		1C4F151B1DD2E76A006FF2CF /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		1C4F151D1DD2E78D006FF2CF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +60,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C4F151E1DD2E78D006FF2CF /* Cocoa.framework in Frameworks */,
+				1C4F151C1DD2E76A006FF2CF /* GLUT.framework in Frameworks */,
+				1C4F151A1DD2E761006FF2CF /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,8 +72,24 @@
 		1C4F14D71DD2E34B006FF2CF = {
 			isa = PBXGroup;
 			children = (
+				1C4F14EC1DD2E42D006FF2CF /* DMatrix.cpp */,
+				1C4F14ED1DD2E42D006FF2CF /* DMatrix.h */,
+				1C4F14EF1DD2E42D006FF2CF /* DVector.cpp */,
+				1C4F14F01DD2E42D006FF2CF /* DVector.h */,
+				1C4F14F21DD2E42D006FF2CF /* HCell.cpp */,
+				1C4F14F31DD2E42D006FF2CF /* HCell.h */,
+				1C4F14F51DD2E42D006FF2CF /* HGE UML Diagram.png */,
+				1C4F14F71DD2E42D006FF2CF /* HMatrix.cpp */,
+				1C4F14F81DD2E42D006FF2CF /* HMatrix.h */,
+				1C4F14FA1DD2E42D006FF2CF /* HPoint.cpp */,
+				1C4F14FB1DD2E42D006FF2CF /* HPoint.h */,
+				1C4F14FD1DD2E42D006FF2CF /* HPosition.cpp */,
+				1C4F14FE1DD2E42D006FF2CF /* HPosition.h */,
+				1C4F15001DD2E42D006FF2CF /* HVector.cpp */,
+				1C4F15011DD2E42D006FF2CF /* HVector.h */,
 				1C4F14E21DD2E34B006FF2CF /* hyperbolic game engine */,
 				1C4F14E11DD2E34B006FF2CF /* Products */,
+				1C4F15181DD2E760006FF2CF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +107,16 @@
 				1C4F14E31DD2E34B006FF2CF /* main.cpp */,
 			);
 			path = "hyperbolic game engine";
+			sourceTree = "<group>";
+		};
+		1C4F15181DD2E760006FF2CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1C4F151D1DD2E78D006FF2CF /* Cocoa.framework */,
+				1C4F151B1DD2E76A006FF2CF /* GLUT.framework */,
+				1C4F15191DD2E761006FF2CF /* OpenGL.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,6 +177,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C4F14E41DD2E34B006FF2CF /* main.cpp in Sources */,
+				1C4F15111DD2E42D006FF2CF /* HPosition.cpp in Sources */,
+				1C4F15091DD2E42D006FF2CF /* DVector.cpp in Sources */,
+				1C4F150B1DD2E42D006FF2CF /* HCell.cpp in Sources */,
+				1C4F150D1DD2E42D006FF2CF /* HMatrix.cpp in Sources */,
+				1C4F15071DD2E42D006FF2CF /* DMatrix.cpp in Sources */,
+				1C4F150F1DD2E42D006FF2CF /* HPoint.cpp in Sources */,
+				1C4F15131DD2E42D006FF2CF /* HVector.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
