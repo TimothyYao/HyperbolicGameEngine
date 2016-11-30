@@ -18,6 +18,7 @@
 		1C4F151A1DD2E761006FF2CF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4F15191DD2E761006FF2CF /* OpenGL.framework */; };
 		1C4F151C1DD2E76A006FF2CF /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4F151B1DD2E76A006FF2CF /* GLUT.framework */; };
 		1C4F151E1DD2E78D006FF2CF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4F151D1DD2E78D006FF2CF /* Cocoa.framework */; };
+		1C651F661DEEA38B006E0D68 /* HObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C651F641DEEA38B006E0D68 /* HObject.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +54,8 @@
 		1C4F15191DD2E761006FF2CF /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		1C4F151B1DD2E76A006FF2CF /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		1C4F151D1DD2E78D006FF2CF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		1C651F631DEEA2AD006E0D68 /* HObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HObject.h; sourceTree = "<group>"; };
+		1C651F641DEEA38B006E0D68 /* HObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HObject.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +87,8 @@
 				1C4F14FA1DD2E42D006FF2CF /* HPoint.cpp */,
 				1C4F14FB1DD2E42D006FF2CF /* HPoint.h */,
 				1C4F14FD1DD2E42D006FF2CF /* HPosition.cpp */,
+				1C651F631DEEA2AD006E0D68 /* HObject.h */,
+				1C651F641DEEA38B006E0D68 /* HObject.cpp */,
 				1C4F14FE1DD2E42D006FF2CF /* HPosition.h */,
 				1C4F15001DD2E42D006FF2CF /* HVector.cpp */,
 				1C4F15011DD2E42D006FF2CF /* HVector.h */,
@@ -181,6 +186,7 @@
 				1C4F15091DD2E42D006FF2CF /* DVector.cpp in Sources */,
 				1C4F150B1DD2E42D006FF2CF /* HCell.cpp in Sources */,
 				1C4F150D1DD2E42D006FF2CF /* HMatrix.cpp in Sources */,
+				1C651F661DEEA38B006E0D68 /* HObject.cpp in Sources */,
 				1C4F15071DD2E42D006FF2CF /* DMatrix.cpp in Sources */,
 				1C4F150F1DD2E42D006FF2CF /* HPoint.cpp in Sources */,
 				1C4F15131DD2E42D006FF2CF /* HVector.cpp in Sources */,
@@ -310,6 +316,7 @@
 				1C4F14E91DD2E34B006FF2CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

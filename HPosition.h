@@ -13,6 +13,7 @@ class HPosition {
 public:
     HCell cell;
     DVector offset;
+    HPosition();
     HPosition(HCell c, DVector v);
 private:
     
