@@ -8,17 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		1C4F14E41DD2E34B006FF2CF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14E31DD2E34B006FF2CF /* main.cpp */; };
-		1C4F15071DD2E42D006FF2CF /* DMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14EC1DD2E42D006FF2CF /* DMatrix.cpp */; };
-		1C4F15091DD2E42D006FF2CF /* DVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14EF1DD2E42D006FF2CF /* DVector.cpp */; };
-		1C4F150B1DD2E42D006FF2CF /* HCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14F21DD2E42D006FF2CF /* HCell.cpp */; };
-		1C4F150D1DD2E42D006FF2CF /* HMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14F71DD2E42D006FF2CF /* HMatrix.cpp */; };
-		1C4F150F1DD2E42D006FF2CF /* HPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14FA1DD2E42D006FF2CF /* HPoint.cpp */; };
-		1C4F15111DD2E42D006FF2CF /* HPosition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F14FD1DD2E42D006FF2CF /* HPosition.cpp */; };
-		1C4F15131DD2E42D006FF2CF /* HVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C4F15001DD2E42D006FF2CF /* HVector.cpp */; };
 		1C4F151A1DD2E761006FF2CF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4F15191DD2E761006FF2CF /* OpenGL.framework */; };
 		1C4F151C1DD2E76A006FF2CF /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4F151B1DD2E76A006FF2CF /* GLUT.framework */; };
 		1C4F151E1DD2E78D006FF2CF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4F151D1DD2E78D006FF2CF /* Cocoa.framework */; };
-		1C651F661DEEA38B006E0D68 /* HObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C651F641DEEA38B006E0D68 /* HObject.cpp */; };
+		1C6FE8BF1E5F47EF007D5705 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C6FE8AB1E5F47EF007D5705 /* Camera.cpp */; };
+		1C6FE8C01E5F47EF007D5705 /* DMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C6FE8AE1E5F47EF007D5705 /* DMatrix.cpp */; };
+		1C6FE8C11E5F47EF007D5705 /* DVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C6FE8B01E5F47EF007D5705 /* DVector.cpp */; };
+		1C6FE8C21E5F47EF007D5705 /* HCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C6FE8B21E5F47EF007D5705 /* HCell.cpp */; };
+		1C6FE8C31E5F47EF007D5705 /* HMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C6FE8B51E5F47EF007D5705 /* HMatrix.cpp */; };
+		1C6FE8C41E5F47EF007D5705 /* HObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C6FE8B71E5F47EF007D5705 /* HObject.cpp */; };
+		1C6FE8C51E5F47EF007D5705 /* HPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C6FE8B91E5F47EF007D5705 /* HPoint.cpp */; };
+		1C6FE8C61E5F47EF007D5705 /* HPosition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C6FE8BB1E5F47EF007D5705 /* HPosition.cpp */; };
+		1C6FE8C71E5F47EF007D5705 /* HVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C6FE8BD1E5F47EF007D5705 /* HVector.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,26 +37,29 @@
 /* Begin PBXFileReference section */
 		1C4F14E01DD2E34B006FF2CF /* hyperbolic game engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "hyperbolic game engine"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C4F14E31DD2E34B006FF2CF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		1C4F14EC1DD2E42D006FF2CF /* DMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DMatrix.cpp; sourceTree = "<group>"; };
-		1C4F14ED1DD2E42D006FF2CF /* DMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMatrix.h; sourceTree = "<group>"; };
-		1C4F14EF1DD2E42D006FF2CF /* DVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DVector.cpp; sourceTree = "<group>"; };
-		1C4F14F01DD2E42D006FF2CF /* DVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVector.h; sourceTree = "<group>"; };
-		1C4F14F21DD2E42D006FF2CF /* HCell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HCell.cpp; sourceTree = "<group>"; };
-		1C4F14F31DD2E42D006FF2CF /* HCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCell.h; sourceTree = "<group>"; };
-		1C4F14F51DD2E42D006FF2CF /* HGE UML Diagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HGE UML Diagram.png"; sourceTree = "<group>"; };
-		1C4F14F71DD2E42D006FF2CF /* HMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HMatrix.cpp; sourceTree = "<group>"; };
-		1C4F14F81DD2E42D006FF2CF /* HMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMatrix.h; sourceTree = "<group>"; };
-		1C4F14FA1DD2E42D006FF2CF /* HPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HPoint.cpp; sourceTree = "<group>"; };
-		1C4F14FB1DD2E42D006FF2CF /* HPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPoint.h; sourceTree = "<group>"; };
-		1C4F14FD1DD2E42D006FF2CF /* HPosition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HPosition.cpp; sourceTree = "<group>"; };
-		1C4F14FE1DD2E42D006FF2CF /* HPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPosition.h; sourceTree = "<group>"; };
-		1C4F15001DD2E42D006FF2CF /* HVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HVector.cpp; sourceTree = "<group>"; };
-		1C4F15011DD2E42D006FF2CF /* HVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HVector.h; sourceTree = "<group>"; };
 		1C4F15191DD2E761006FF2CF /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		1C4F151B1DD2E76A006FF2CF /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		1C4F151D1DD2E78D006FF2CF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		1C651F631DEEA2AD006E0D68 /* HObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HObject.h; sourceTree = "<group>"; };
-		1C651F641DEEA38B006E0D68 /* HObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HObject.cpp; sourceTree = "<group>"; };
+		1C6FE8AB1E5F47EF007D5705 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		1C6FE8AC1E5F47EF007D5705 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		1C6FE8AD1E5F47EF007D5705 /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
+		1C6FE8AE1E5F47EF007D5705 /* DMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DMatrix.cpp; sourceTree = "<group>"; };
+		1C6FE8AF1E5F47EF007D5705 /* DMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMatrix.h; sourceTree = "<group>"; };
+		1C6FE8B01E5F47EF007D5705 /* DVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DVector.cpp; sourceTree = "<group>"; };
+		1C6FE8B11E5F47EF007D5705 /* DVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVector.h; sourceTree = "<group>"; };
+		1C6FE8B21E5F47EF007D5705 /* HCell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HCell.cpp; sourceTree = "<group>"; };
+		1C6FE8B31E5F47EF007D5705 /* HCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCell.h; sourceTree = "<group>"; };
+		1C6FE8B41E5F47EF007D5705 /* HGE UML Diagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HGE UML Diagram.png"; sourceTree = "<group>"; };
+		1C6FE8B51E5F47EF007D5705 /* HMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HMatrix.cpp; sourceTree = "<group>"; };
+		1C6FE8B61E5F47EF007D5705 /* HMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMatrix.h; sourceTree = "<group>"; };
+		1C6FE8B71E5F47EF007D5705 /* HObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HObject.cpp; sourceTree = "<group>"; };
+		1C6FE8B81E5F47EF007D5705 /* HObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HObject.h; sourceTree = "<group>"; };
+		1C6FE8B91E5F47EF007D5705 /* HPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HPoint.cpp; sourceTree = "<group>"; };
+		1C6FE8BA1E5F47EF007D5705 /* HPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPoint.h; sourceTree = "<group>"; };
+		1C6FE8BB1E5F47EF007D5705 /* HPosition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HPosition.cpp; sourceTree = "<group>"; };
+		1C6FE8BC1E5F47EF007D5705 /* HPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPosition.h; sourceTree = "<group>"; };
+		1C6FE8BD1E5F47EF007D5705 /* HVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HVector.cpp; sourceTree = "<group>"; };
+		1C6FE8BE1E5F47EF007D5705 /* HVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HVector.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,23 +79,6 @@
 		1C4F14D71DD2E34B006FF2CF = {
 			isa = PBXGroup;
 			children = (
-				1C4F14EC1DD2E42D006FF2CF /* DMatrix.cpp */,
-				1C4F14ED1DD2E42D006FF2CF /* DMatrix.h */,
-				1C4F14EF1DD2E42D006FF2CF /* DVector.cpp */,
-				1C4F14F01DD2E42D006FF2CF /* DVector.h */,
-				1C4F14F21DD2E42D006FF2CF /* HCell.cpp */,
-				1C4F14F31DD2E42D006FF2CF /* HCell.h */,
-				1C4F14F51DD2E42D006FF2CF /* HGE UML Diagram.png */,
-				1C4F14F71DD2E42D006FF2CF /* HMatrix.cpp */,
-				1C4F14F81DD2E42D006FF2CF /* HMatrix.h */,
-				1C4F14FA1DD2E42D006FF2CF /* HPoint.cpp */,
-				1C4F14FB1DD2E42D006FF2CF /* HPoint.h */,
-				1C4F14FD1DD2E42D006FF2CF /* HPosition.cpp */,
-				1C651F631DEEA2AD006E0D68 /* HObject.h */,
-				1C651F641DEEA38B006E0D68 /* HObject.cpp */,
-				1C4F14FE1DD2E42D006FF2CF /* HPosition.h */,
-				1C4F15001DD2E42D006FF2CF /* HVector.cpp */,
-				1C4F15011DD2E42D006FF2CF /* HVector.h */,
 				1C4F14E21DD2E34B006FF2CF /* hyperbolic game engine */,
 				1C4F14E11DD2E34B006FF2CF /* Products */,
 				1C4F15181DD2E760006FF2CF /* Frameworks */,
@@ -109,6 +96,26 @@
 		1C4F14E21DD2E34B006FF2CF /* hyperbolic game engine */ = {
 			isa = PBXGroup;
 			children = (
+				1C6FE8AB1E5F47EF007D5705 /* Camera.cpp */,
+				1C6FE8AC1E5F47EF007D5705 /* Camera.h */,
+				1C6FE8AD1E5F47EF007D5705 /* Camera.hpp */,
+				1C6FE8AE1E5F47EF007D5705 /* DMatrix.cpp */,
+				1C6FE8AF1E5F47EF007D5705 /* DMatrix.h */,
+				1C6FE8B01E5F47EF007D5705 /* DVector.cpp */,
+				1C6FE8B11E5F47EF007D5705 /* DVector.h */,
+				1C6FE8B21E5F47EF007D5705 /* HCell.cpp */,
+				1C6FE8B31E5F47EF007D5705 /* HCell.h */,
+				1C6FE8B41E5F47EF007D5705 /* HGE UML Diagram.png */,
+				1C6FE8B51E5F47EF007D5705 /* HMatrix.cpp */,
+				1C6FE8B61E5F47EF007D5705 /* HMatrix.h */,
+				1C6FE8B71E5F47EF007D5705 /* HObject.cpp */,
+				1C6FE8B81E5F47EF007D5705 /* HObject.h */,
+				1C6FE8B91E5F47EF007D5705 /* HPoint.cpp */,
+				1C6FE8BA1E5F47EF007D5705 /* HPoint.h */,
+				1C6FE8BB1E5F47EF007D5705 /* HPosition.cpp */,
+				1C6FE8BC1E5F47EF007D5705 /* HPosition.h */,
+				1C6FE8BD1E5F47EF007D5705 /* HVector.cpp */,
+				1C6FE8BE1E5F47EF007D5705 /* HVector.h */,
 				1C4F14E31DD2E34B006FF2CF /* main.cpp */,
 			);
 			path = "hyperbolic game engine";
@@ -182,14 +189,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C4F14E41DD2E34B006FF2CF /* main.cpp in Sources */,
-				1C4F15111DD2E42D006FF2CF /* HPosition.cpp in Sources */,
-				1C4F15091DD2E42D006FF2CF /* DVector.cpp in Sources */,
-				1C4F150B1DD2E42D006FF2CF /* HCell.cpp in Sources */,
-				1C4F150D1DD2E42D006FF2CF /* HMatrix.cpp in Sources */,
-				1C651F661DEEA38B006E0D68 /* HObject.cpp in Sources */,
-				1C4F15071DD2E42D006FF2CF /* DMatrix.cpp in Sources */,
-				1C4F150F1DD2E42D006FF2CF /* HPoint.cpp in Sources */,
-				1C4F15131DD2E42D006FF2CF /* HVector.cpp in Sources */,
+				1C6FE8C51E5F47EF007D5705 /* HPoint.cpp in Sources */,
+				1C6FE8C11E5F47EF007D5705 /* DVector.cpp in Sources */,
+				1C6FE8BF1E5F47EF007D5705 /* Camera.cpp in Sources */,
+				1C6FE8C01E5F47EF007D5705 /* DMatrix.cpp in Sources */,
+				1C6FE8C21E5F47EF007D5705 /* HCell.cpp in Sources */,
+				1C6FE8C61E5F47EF007D5705 /* HPosition.cpp in Sources */,
+				1C6FE8C41E5F47EF007D5705 /* HObject.cpp in Sources */,
+				1C6FE8C31E5F47EF007D5705 /* HMatrix.cpp in Sources */,
+				1C6FE8C71E5F47EF007D5705 /* HVector.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
