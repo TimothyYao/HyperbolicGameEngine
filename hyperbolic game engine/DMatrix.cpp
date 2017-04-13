@@ -116,7 +116,7 @@ DMatrix DMatrix::scale(double s) {
 }
 
 DMatrix DMatrix::toNormal() {
-    return this->getRotation()*DMatrix(this->toVector().toNormal());
+    return DMatrix(this->toVector().toNormal())*this->getRotation();
 //    DMatrix normal = *this;
 //    DVector v = this->toVector().toNormal();
 ////    c^2-d^2a^2-d^2b^2 = -1;
@@ -147,6 +147,7 @@ void DMatrix::normalize() {
         for (int j = 0; j < 3; j++) {
             if (mat[i][j] != mat[i][j]) {
                 prev.print();
+                this->print();
                 std::cout << "in normalize" << std::endl;
                 throw std::exception();
             }
@@ -163,7 +164,7 @@ DVector DMatrix::toVector() {
 }
 
 DMatrix DMatrix::getRotation() {
-    return *this*DMatrix(this->toVector().toNormal()).inverse();
+    return DMatrix(this->toVector().toNormal()).inverse()**this;
 }
 
 double DMatrix::distance(DMatrix m) {

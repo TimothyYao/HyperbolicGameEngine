@@ -21,7 +21,7 @@ const double tileLen = acosh((1+sqrt(5))/2);
 long msLastAnimated;
 bool showTile = false;
 bool overlapping = false;
-GLdouble trsize = 10;
+bool gravityOn = true;
 
 // draws point at coordinate (x,y) with size s
 void drawPoint(GLdouble x, GLdouble y, GLdouble size) {
@@ -57,6 +57,7 @@ public:
     DVector horiPlane;
     DVector gravity;
     bool active = true;
+    bool floor = false;
     double halfLen;
     GLdouble r = 1;
     GLdouble g = 0;
@@ -86,7 +87,7 @@ public:
         initBounds();
     }
     void initBounds() {
-        DMatrix t = position.cell.center.toDouble()*position.offset; //try to remove toDouble()
+        DMatrix t = position.cell.toDouble()*position.offset; //try to remove toDouble()
         DVector p = (t*start).toVector().toNormal();
         DVector q = (t*end).toVector().toNormal();
 //        vertPlane = p.planeBetween(q);
@@ -105,12 +106,6 @@ public:
         
         midTop = (DMatrix(midpoint)*rot*DMatrix(start)*DMatrix(midpoint).inverse()).toVector().toNormal();
         midBot = (DMatrix(midpoint)*rot*DMatrix(end)*DMatrix(midpoint).inverse()).toVector().toNormal();
-//        midpoint.print();
-//        (DMatrix()*rot).print();
-//        midBot = midpoint*DMatrix().rotate(angle)*midBot;
-        
-        
-//        horiPlane = (t*midBot).toVector().toNormal().planeBetween((t*midTop).toVector().toNormal());
         horiPlane = midBot.toNormal().planeBetween(midTop.toNormal());
         halfLen = p.distance(q)/2;
         gravity = DVector().hlerp((DMatrix(midTop).inverse()*DMatrix(midBot)).toVector().toNormal(), 1/120);
@@ -127,45 +122,61 @@ public:
         DMatrix objPos = DMatrix().rotate(DEG2RAD*90*rotations)*offset;
         return objPos.toVector().toNormal().distancePlane(horiPlane);
     }
-    int getRotations(HObject obj) {
+    int getRotations(HPosition pos) {
         int rotations = 0;
-        HMatrix objCellMatrix = obj.position.cell.center;
-        while (objCellMatrix != position.cell.center) {
+        HMatrix objCellMatrix = pos.cell;
+        while (objCellMatrix != pos.cell) {
             rotations++;
             objCellMatrix.rotateCC();
         }
         return rotations;
     }
     
-    bool isColliding(HObject obj) {
+    bool isColliding(HPosition pos) {
         if (!active) return false;
-        if (!obj.position.cell.sameCell(position.cell)) return false;
-        int rotations = getRotations(obj);
-        return (std::abs(distanceW(obj.position.offset, rotations)) < halfLen &&
-                std::abs(distanceH(obj.position.offset, rotations)) < 0.02);
+        if (!pos.cell.sameCell(position.cell) && !pos.cell.isAdjacent(position.cell)) {
+            return false;
+        }
+        if (pos.cell.isAdjacent(position.cell)) {
+            pos.offset = (position.cell.inverse()*pos.cell).toDouble()*pos.offset;
+        }
+        int rotations = getRotations(pos);
+        return (std::abs(distanceW(pos.offset, rotations)) < halfLen &&
+                std::abs(distanceH(pos.offset, rotations)) < 0.02);
     }
     
-    DMatrix getGravity(HObject obj) {
-        if (obj.position.cell.sameCell(position.cell)) {
-            int rotations = getRotations(obj);
-            double scale = tileLen/distanceH(obj.position.offset, rotations);
-            return DMatrix(DVector().hlerp((DMatrix(midTop).inverse()*DMatrix(midBot)).toVector().toNormal(), scale/50000));
+    bool isColliding(HObject obj) {
+        HPosition pos = obj.position;
+        if (!active) return false;
+        if (!pos.cell.sameCell(position.cell) && !pos.cell.isAdjacent(position.cell)) {
+            return false;
+        }
+        if (pos.cell.isAdjacent(position.cell)) {
+            pos.offset = (position.cell.inverse()*pos.cell).toDouble()*pos.offset;
+        }
+        int rotations = getRotations(pos);
+        return (std::abs(distanceW(pos.offset, rotations)) < halfLen &&
+                std::abs(distanceH(pos.offset, rotations)) < 0.02 + obj.size);
+    }
+    
+    DMatrix getGravity(HPosition pos) {
+        if (pos.cell.sameCell(position.cell)) {
+            int rotations = getRotations(pos);
+            return DMatrix::translateMatY(-tileLen/6000);
+            double dist = tileLen/distanceH(pos.offset, rotations);
+            return /*obj.position.offset.getRotation().inverse()**/DMatrix(DVector().hlerp((DMatrix(midTop).inverse()*DMatrix(midBot)).toVector().toNormal(), dist/50000));
         }
         return DMatrix();
     }
     
-    DMatrix getCorrection(HObject obj, DMatrix previous) {
-        int rotations = getRotations(obj);
+    DMatrix getCorrection(HPosition pos, DMatrix previous) {
+        int rotations = getRotations(pos);
         
         double dx0 = distanceW(previous, rotations);
         double dy0 = distanceH(previous, rotations);
-        double dx = distanceW(obj.position.offset, rotations);
-        double dy = distanceH(obj.position.offset, rotations);
+        double dx = distanceW(pos.offset, rotations);
+        double dy = distanceH(pos.offset, rotations);
         
-        double t = std::abs((0.02-dy)/(dy0-dy));
-        if (t > 1) {
-            t = 1;
-        }
         
         if (std::abs(dx) < halfLen && (std::abs(dy) < 0.02 || dy0*dy <= 0)) {
             //return base*DMatrix(midpoint.hlerp(midTop, (0.02-dy)/halfLen));
@@ -175,8 +186,14 @@ public:
             if (dy0 == dy) {
                 return DMatrix();
             }
-            return DMatrix(DVector().hlerp(obj.velocity.inverse().toVector().toNormal(),t));
-//            return obj.position.offset.inverse()*DMatrix(obj.position.offset.toVector().toNormal().hlerp(previous.toVector(), t).toNormal());
+            double t = std::abs((0.02-dy)/(dy0-dy));
+            if (t > 1) {
+                t = 1;
+            }
+//            PV = X
+//            P-1PV = P-1X
+            return DMatrix(DVector().hlerp((previous.inverse()*pos.offset).inverse().toVector().toNormal(),t));
+//            return DMatrix(DVector().hlerp(obj.velocity.inverse().toVector().toNormal(),t));
         }
         return DMatrix();
     }
@@ -211,30 +228,65 @@ int main(int argc, char * argv[]) {
         objects.push_back(new HObject());
     }
     for (int i = 0; i < 3; i++) {
-        objects[i+1]->position.cell.center.up();
-        objects[i+4]->position.cell.center.down();
-        objects[i+7]->position.cell.center.right();
-        objects[i+10]->position.cell.center.left();
+        objects[i+1]->position.cell.up();
+        objects[i+4]->position.cell.down();
+        objects[i+7]->position.cell.right();
+        objects[i+10]->position.cell.left();
     }
-    objects[2]->position.cell.center.right();
-    objects[3]->position.cell.center.left();
-    objects[5]->position.cell.center.right();
-    objects[6]->position.cell.center.left();
-    objects[8]->position.cell.center.up();
-    objects[9]->position.cell.center.down();
-    objects[11]->position.cell.center.up();
-    objects[12]->position.cell.center.down();
+    objects[2]->position.cell.right();
+    objects[3]->position.cell.left();
+    objects[5]->position.cell.right();
+    objects[6]->position.cell.left();
+    objects[8]->position.cell.up();
+    objects[9]->position.cell.down();
+    objects[11]->position.cell.up();
+    objects[12]->position.cell.down();
+    
+    double w = sqrt(1+2/sqrt(5));
+    double z = sqrt((w*w-1)/2);
+    
+    std::vector<DVector> v(4);
+    v[0] = DVector(-z,z,w);
+    v[1] = DVector(z,z,w);
+    v[2] = DVector(z,-z,w);
+    v[3] = DVector(-z,-z,w);
+    
+    for (int i = 0; i < 4; i++) {
+        platforms.push_back(new Platform());
+        platforms.back()->floor = true;
+    }
+    platforms[0]->position.cell.left();
+    platforms[2]->position.cell.right();
+    platforms[3]->position.cell.right();
+    platforms[3]->position.cell.down();
+    
+    for (int i = 0; i < 4; i++) {
+        platforms[i]->start = v[3];
+        platforms[i]->end = v[2];
+    }
+    
+    DVector v1 = DVector().hlerp(HMatrix::leftMatrix().toDouble().toVector(), 0.25);
+    DVector v2 = DVector().hlerp(HMatrix::rightMatrix().toDouble().toVector(), 0.25);
+    DVector v3 = v[3].hlerp(v[2], 0.25);
+    DVector v4 = v[3].hlerp(v[2], 0.75);
     
     for (int i = 0; i < 3; i++) {
-        platforms.push_back(new Platform());
+        platforms.push_back(new Platform(DVector(), DVector(), 0, 1, 0));
+        platforms.back()->position.cell.right();
     }
-//    platforms[1]->active = false;
-    platforms[0]->position.cell.center.left();
-    platforms[2]->position.cell.center.right();
-    platforms.push_back(new Platform(DVector(), (DMatrix::translateMatY(tileLen/2)*DMatrix::translateMatX(-tileLen/2)).toVector(), 0, 1, 1));
-//    platforms.push_back(new Platform(DMatrix(), DMatrix::translateMatY(tileLen/2), 0, 1, 1));
-    platforms[3]->position.cell.center.right();
-//    platforms[3]->position.offset = DMatrix::translateMatX(-tileLen/2);
+    platforms[4]->start = v1;
+    platforms[4]->end = v2;
+    platforms[4]->floor = true;
+    platforms[5]->start = v1;
+    platforms[5]->end = v3;
+    platforms[6]->start = v2;
+    platforms[6]->end = v4;
+    
+//    platforms.push_back(new Platform(DVector(), (DMatrix::translateMatY(tileLen/2)*DMatrix::translateMatX(-tileLen/2)).toVector(), 0, 1, 0));
+    
+    for (int i = 0; i < platforms.size(); i++) {
+        platforms[i]->initBounds();
+    }
     
     
     glutTimerFunc(5, animate, 0);
@@ -247,6 +299,7 @@ int main(int argc, char * argv[]) {
 ////        objects[i]
 //    }
     msLastAnimated = getTime();
+//    HObject::scale = 300;
     glutMainLoop();
     
 }
@@ -267,23 +320,27 @@ void animate(int value) {
         dude.update();
         overlapping = false;
         for (int i = 0; i < platforms.size(); i++) {
-            if (platforms[i]->isColliding(dude)) {
-                DMatrix correction = platforms[i]->getCorrection(dude, previous);
+            if (platforms[i]->isColliding(dude.position)) {
+                DMatrix correction = platforms[i]->getCorrection(dude.position, previous);
                 dude.position.offset*=correction;
                 dude.position.normalize();
                 overlapping = true;
-                dude.velocity = DMatrix();
-//                dude.frozen = true;
-                trsize = 20;
+                if (platforms[i]->floor) {
+                    dude.grounded = true;
+                    dude.hasJumped = false;
+                }
+                dude.velocityY = 0;
+                dude.velocityX = 0;
             }
         }
-        if (!overlapping) {
-            for (int i = 0; i < platforms.size(); i++) {
-                dude.velocity*=platforms[i]->getGravity(dude);
-            }
+        if (gravityOn && !overlapping) {
+            dude.velocityY-=tileLen/6000;
         }
+//        for (int i = 0; i < platforms.size(); i++) {
+//            dude.velocity*=platforms[i]->getGravity(dude.position);
+//        }
         dude.position.normalize();
-        c.position.cell.center = dude.position.cell.center;
+        c.position.cell = dude.position.cell;
         c.position.offset = dude.position.offset;
         glutPostRedisplay();
         
@@ -310,12 +367,12 @@ void display()
     } else {
         for (int i = 0; i < platforms.size(); i++) {
             platforms[i]->draw(c);
-            platforms[i]->drawPoint(c, platforms[i]->midTop);
-            platforms[i]->drawPoint(c, platforms[i]->midBot);
-            DMatrix midpoint(platforms[i]->start+platforms[i]->end);
-            glPointSize(5);
-            platforms[i]->drawPoint(c, midpoint);
-            glPointSize(1);
+//            platforms[i]->drawPoint(c, platforms[i]->midTop);
+//            platforms[i]->drawPoint(c, platforms[i]->midBot);
+//            DMatrix midpoint(platforms[i]->start+platforms[i]->end);
+//            glPointSize(5);
+//            platforms[i]->drawPoint(c, midpoint);
+//            glPointSize(1);
         }
     }
     double golden = (1+sqrt(5))/2;
@@ -324,7 +381,7 @@ void display()
     v.normalize();
     DMatrix up(1, 0, 0, 0, v[2], v[1], 0, v[1], v[2]);
     DMatrix right(v[2], 0, v[1], 0, 1, 0, v[1], 0, v[2]);
-    glColor3d(0, 1, 0);
+    glColor3d(0, 1, 1);
     glPointSize(7);
     dude.drawPoint(c, dude.position.offset.inverse());
     glPointSize(3);
@@ -332,9 +389,11 @@ void display()
     dude.drawLine(c, DMatrix(), up, 1);
     dude.drawLine(c, DMatrix(), right, 1);
     dude.drawLine(c, up, right, 1);
+//    dude.drawPoint(c, dude.position.offset.inverse()*DMatrix(dude.position.offset.toVector().toNormal())*dude.position.offset.getRotation(), 3, 0, 0, 1);
+//    dude.drawLine(c, DMatrix(), dude.position.offset.inverse()*DMatrix(dude.position.offset.toVector().toNormal())*dude.position.offset.getRotation()*up, 1);
     glColor3d(0, 0, 1);
-    if (overlapping) {
-        drawPoint(250, 250, trsize);
+    if (gravityOn) {
+        drawPoint(250, 250, 20);
     }
 //    std::cout << counter << std::endl;
     counter++;
@@ -372,25 +431,37 @@ void processKeyboard(unsigned char key, int xx, int yy) {
             c.position.offset.rotate(15*DEG2RAD);
             break;
         case ',': // rotate camera counterclockwise 90 degrees
-            c.position.cell.center.rotateCC();
+            c.position.cell.rotateCC();
             break;
         case '.': // rotate camera clockwise 90 degrees
-            c.position.cell.center.rotateCW();
+            c.position.cell.rotateCW();
             break;
         case 'w': // move object up d/5 units
-            dude.velocity = DMatrix::translateMatY(tileLen/120)*dude.velocity;
+            if (dude.grounded) {
+                dude.velocityY = tileLen/105;
+                dude.grounded = false;
+            } else if (!dude.hasJumped) {
+                dude.velocityY = tileLen/105;
+                dude.hasJumped = true;
+            }
 //            dude.frozen = false;
             break;
         case 's':
 //            dude.frozen = true;
-            dude.velocity = DMatrix();
+            dude.velocityY = 0;
+            dude.velocityX = 0;
             break;
         case 'a':
-            dude.velocity = DMatrix::translateMatX(-tileLen/120)*dude.velocity;
+            dude.velocityX-=tileLen/200;
+            if (dude.velocityX < -tileLen/110) {
+                dude.velocityX = -tileLen/110;
+            }
             break;
         case 'd':
-//            dude.frozen = false;
-            dude.velocity = DMatrix::translateMatX(tileLen/120)*dude.velocity;
+            dude.velocityX+=tileLen/200;
+            if (dude.velocityX > tileLen/110) {
+                dude.velocityX = tileLen/110;
+            }
             break;
         case '`': // change projection
             c.projection = (c.projection+1)%2;
@@ -398,16 +469,31 @@ void processKeyboard(unsigned char key, int xx, int yy) {
         case '=': // swap show tile
             showTile = !showTile;
             break;
+        case 'g': //toggle gravity
+            gravityOn = !gravityOn;
+            break;
         case 'b': {
-            std::cout << platforms[1]->distanceW(dude.position.offset, 0) << std::endl;
-            std::cout << platforms[1]->distanceH(dude.position.offset, 0) << std::endl;
+            std::cout << "cell:" << std::endl;
+            dude.position.cell.print();
+            std::cout << "offset:" << std::endl;
+            dude.position.offset.print();
+            std::cout << "offset.toVector():" << std::endl;
+            dude.position.offset.toVector().print();
+            std::cout << "offset.toVector().toNormal():" << std::endl;
+            dude.position.offset.toVector().toNormal().print();
+            std::cout << "offset.getRotation():" << std::endl;
+            dude.position.offset.getRotation().print();
+            std::cout << "offset.toVector().toNormal()*offset.getRotation():" << std::endl;
+            (DMatrix(dude.position.offset.toVector().toNormal())*dude.position.offset.getRotation()).print();
+            std::cout << "grounded: " << dude.grounded << std::endl;
+            std::cout << "hasJumped: " << dude.hasJumped << std::endl;
             break;
         }
         default:
             break;
     }
     dude.position.normalize();
-    c.position.cell.center = dude.position.cell.center;
+    c.position.cell = dude.position.cell;
     c.position.offset = dude.position.offset;
     glutPostRedisplay();
 }
@@ -441,7 +527,7 @@ void processSpecialKeys(int key, int xx, int yy) {
             break;
     }
     c.position.normalize();
-    c.position.cell.center = dude.position.cell.center;
+    c.position.cell = dude.position.cell;
     c.position.offset = dude.position.offset;
     glutPostRedisplay();
 }

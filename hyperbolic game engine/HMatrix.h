@@ -4,6 +4,7 @@
 #include <cmath>
 #include <sstream>
 #include <string>
+#include <vector>
 #include "HPoint.h"
 #include "HVector.h"
 #include "DMatrix.h"
@@ -16,6 +17,8 @@ struct HMatrix {
     bool operator==(HMatrix that);
     bool operator!=(HMatrix that);
     //    HMatrix(const HVector a, const HVector& b, const HVector& c);
+    
+    bool sameCell(HMatrix cell);
     
     DMatrix toDouble();
     HVector toVector();
@@ -45,6 +48,7 @@ struct HMatrix {
     
     
     HMatrix inverse();
+    bool isAdjacent(HMatrix cell);
     
     static HMatrix upMatrix();
     static HMatrix downMatrix();

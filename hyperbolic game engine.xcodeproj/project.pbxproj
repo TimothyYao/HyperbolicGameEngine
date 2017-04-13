@@ -42,7 +42,6 @@
 		1C4F151D1DD2E78D006FF2CF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1C6FE8AB1E5F47EF007D5705 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		1C6FE8AC1E5F47EF007D5705 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
-		1C6FE8AD1E5F47EF007D5705 /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		1C6FE8AE1E5F47EF007D5705 /* DMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DMatrix.cpp; sourceTree = "<group>"; };
 		1C6FE8AF1E5F47EF007D5705 /* DMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMatrix.h; sourceTree = "<group>"; };
 		1C6FE8B01E5F47EF007D5705 /* DVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DVector.cpp; sourceTree = "<group>"; };
@@ -98,7 +97,6 @@
 			children = (
 				1C6FE8AB1E5F47EF007D5705 /* Camera.cpp */,
 				1C6FE8AC1E5F47EF007D5705 /* Camera.h */,
-				1C6FE8AD1E5F47EF007D5705 /* Camera.hpp */,
 				1C6FE8AE1E5F47EF007D5705 /* DMatrix.cpp */,
 				1C6FE8AF1E5F47EF007D5705 /* DMatrix.h */,
 				1C6FE8B01E5F47EF007D5705 /* DVector.cpp */,

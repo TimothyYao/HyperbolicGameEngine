@@ -37,8 +37,12 @@ public:
     std::vector<DMatrix*> points;
     std::string name;
     double size = 1;
+    int scale = 300;
     bool frozen = false;
-    DMatrix velocity = DMatrix();
+    bool grounded = false;
+    bool hasJumped = false;
+    double velocityY = 0;
+    double velocityX = 0;
     HPosition position = HPosition();
 };
 

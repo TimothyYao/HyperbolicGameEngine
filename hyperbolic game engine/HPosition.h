@@ -11,10 +11,10 @@
 
 class HPosition {
 public:
-    HCell cell;
+    HMatrix cell;
     DMatrix offset;
     HPosition();
-    HPosition(HCell c, DMatrix v);
+    HPosition(HMatrix c, DMatrix v);
     bool needNormalize(HMatrix& result);
     void normalize();
 private:

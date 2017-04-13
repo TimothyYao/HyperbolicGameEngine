@@ -2,11 +2,11 @@
 
 
 HPosition::HPosition() {
-    this->cell = HCell();
+    this->cell = HMatrix();
     this->offset = DMatrix();
 }
 
-HPosition::HPosition(HCell c, DMatrix v) {
+HPosition::HPosition(HMatrix c, DMatrix v) {
     this->cell = c;
     this->offset = v;
 }
@@ -76,8 +76,10 @@ bool HPosition::needNormalize(HMatrix& nearest) {
 
 void HPosition::normalize() {
     HMatrix nearest;
-    if (needNormalize(nearest)) {
-        cell.center*=nearest;
+    // may need fixing
+    while (needNormalize(nearest)) {
+        cell*=nearest;
         offset=nearest.inverse().toDouble()*offset;
     }
+//    offset.normalize();
 }

@@ -18,7 +18,7 @@ public:
     int projection = 0;
     double velocity = 0;
     Camera();
-    Camera(HCell cell, DMatrix offset);
+    Camera(HMatrix cell, DMatrix offset);
 //    void translate(DMatrix translation);
     void snap();
     void moveUpCell();

@@ -47,6 +47,11 @@ bool HMatrix::operator!=(HMatrix that) {
 //    }
 //}
 
+bool HMatrix::sameCell(HMatrix cell) {
+    return mat[0][2] == cell[0][2] &&
+    mat[1][2] == cell[1][2];
+}
+
 HMatrix HMatrix::operator*(HMatrix m) {
     HMatrix n;
     for (int i = 0; i < 3; i++) {
@@ -204,6 +209,27 @@ HMatrix HMatrix::inverse() {
     return m;
 }
 
+bool HMatrix::isAdjacent(HMatrix cell) {
+    std::vector<HMatrix> adj(12);
+    adj[0] = HMatrix::upMatrix();
+    adj[1] = HMatrix::downMatrix();
+    adj[2] = HMatrix::leftMatrix();
+    adj[3] = HMatrix::rightMatrix();
+    adj[4] = HMatrix::upMatrix()*HMatrix::rightMatrix();
+    adj[5] = HMatrix::upMatrix()*HMatrix::leftMatrix();
+    adj[6] = HMatrix::rightMatrix()*HMatrix::upMatrix();
+    adj[7] = HMatrix::rightMatrix()*HMatrix::downMatrix();
+    adj[8] = HMatrix::leftMatrix()*HMatrix::upMatrix();
+    adj[9] = HMatrix::leftMatrix()*HMatrix::downMatrix();
+    adj[10] = HMatrix::downMatrix()*HMatrix::rightMatrix();
+    adj[11] = HMatrix::downMatrix()*HMatrix::leftMatrix();
+    for (int i = 0; i < 12; i++) {
+        if ((*this*adj[i]).sameCell(cell)) {
+            return true;
+        }
+    }
+    return false;
+}
 
 HMatrix HMatrix::upMatrix() {
     HMatrix m;

@@ -8,6 +8,8 @@
 #include "HVector.h"
 #include "HMatrix.h"
 
+// THIS CLASS IS DEPRECATED!
+
 class HCell {
 public:
 //    HVector center;

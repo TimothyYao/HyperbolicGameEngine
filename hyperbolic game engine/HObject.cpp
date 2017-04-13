@@ -8,12 +8,14 @@
 
 #include "HObject.h"
 
+const double tileLen = acosh((1+sqrt(5))/2);
+
 HObject::HObject() {
-    size = 1;
+    size = 0;
 }
 
 double* HObject::getScreenLocation(Camera camera, DMatrix m) {
-    HMatrix ht = camera.position.cell.center.inverse()*position.cell.center;
+    HMatrix ht = camera.position.cell.inverse()*position.cell;
     DVector result = (camera.position.offset.inverse()*ht.toDouble()*position.offset*m).toVector();
     // change projection here
     double* xy;
@@ -31,7 +33,7 @@ double* HObject::getScreenLocation(Camera camera, DMatrix m) {
 void HObject::drawPoint(Camera camera, DMatrix m) {
     double* xy = getScreenLocation(camera, m);
     glBegin(GL_POINTS);
-    glVertex2d(200*xy[0], 200*xy[1]);
+    glVertex2d(scale*xy[0], scale*xy[1]);
     glEnd();
 }
 
@@ -50,10 +52,10 @@ void HObject::drawLine(Camera camera, DMatrix p, DMatrix q, int divisions) {
     double* a = getScreenLocation(camera, m);
     for (int i = 0; i < divisions; i++) {
         glBegin(GL_LINES);
-        glVertex2d(200*a[0], 200*a[1]);
+        glVertex2d(scale*a[0], scale*a[1]);
         DMatrix n = DMatrix(p.toVector().hlerp(q.toVector(), ((double)(i+1))/divisions));
         a = getScreenLocation(camera, n);
-        glVertex2d(200*a[0], 200*a[1]);
+        glVertex2d(scale*a[0], scale*a[1]);
         glEnd();
     }
 }
@@ -101,7 +103,9 @@ void HObject::drawCenter(Camera camera) {
 
 HPosition HObject::nextPosition() {
     HPosition p;
-    p.offset*=velocity;
+//    p.offset*=velocityY;
+    p.offset*=DMatrix::translateMatY(velocityY);
+    p.offset*=DMatrix::translateMatX(velocityX);
     p.normalize();
     return p;
 }
@@ -109,7 +113,8 @@ HPosition HObject::nextPosition() {
 void HObject::update() {
     if (!frozen) {
         DMatrix prev = position.offset;
-        position.offset*=velocity;
+        position.offset*=DMatrix::translateMatY(velocityY);
+        position.offset*=DMatrix::translateMatX(velocityX);
         DMatrix after = position.offset;
 //        position.offset.normalize();
         if (position.offset[0][0]!=position.offset[0][0]) {

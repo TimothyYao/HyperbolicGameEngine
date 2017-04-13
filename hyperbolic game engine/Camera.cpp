@@ -11,7 +11,7 @@
 Camera::Camera() {
 }
 
-Camera::Camera(HCell cell, DMatrix offset) {
+Camera::Camera(HMatrix cell, DMatrix offset) {
     position = HPosition();
     position.cell = cell;
     position.offset = offset;
@@ -23,35 +23,35 @@ void Camera::snap() {
     this->position.offset = DMatrix();
 }
 void Camera::moveUpCell() {
-    this->position.cell.center.translateUp();
+    this->position.cell.translateUp();
 }
 void Camera::moveUpCell(unsigned int num) {
     for (unsigned int i = 0; i < num;i ++) {
-        this->position.cell.center.translateUp();
+        this->position.cell.translateUp();
     }
 }
 void Camera::moveDownCell() {
-    this->position.cell.center.translateDown();
+    this->position.cell.translateDown();
 }
 void Camera::moveDownCell(unsigned int num){
     for (unsigned int i = 0; i < num;i ++) {
-        this->position.cell.center.translateDown();
+        this->position.cell.translateDown();
     }
 }
 void Camera::moveRightCell() {
-    this->position.cell.center.translateRight();
+    this->position.cell.translateRight();
 }
 void Camera::moveRightCell(unsigned int num) {
     for (unsigned int i = 0; i < num;i ++) {
-        this->position.cell.center.translateRight();
+        this->position.cell.translateRight();
     }
 }
 void Camera::moveLeftCell() {
-    this->position.cell.center.translateLeft();
+    this->position.cell.translateLeft();
 }
 void Camera::moveLeftCell(unsigned int num) {
     for (unsigned int i = 0; i < num;i ++) {
-        this->position.cell.center.translateLeft();
+        this->position.cell.translateLeft();
     }
 }
 
