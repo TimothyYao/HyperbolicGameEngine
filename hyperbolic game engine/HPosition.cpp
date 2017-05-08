@@ -80,6 +80,9 @@ void HPosition::normalize() {
     while (needNormalize(nearest)) {
         cell*=nearest;
         offset=nearest.inverse().toDouble()*offset;
+//        offset.normalize();
+        std::cout << std::abs(offset[2][2]*offset[2][2]-offset[0][2]*offset[0][2]-offset[1][2]*offset[1][2]) << std::endl;
+        
     }
-//    offset.normalize();
+    
 }

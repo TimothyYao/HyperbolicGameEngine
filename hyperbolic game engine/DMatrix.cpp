@@ -79,7 +79,9 @@ DMatrix DMatrix::inverse() {
     double m20 = this->mat[2][0];
     double m21 = this->mat[2][1];
     double m22 = this->mat[2][2];
-    double det = m00*(m11*m22-m21*m12)-m01*(m10*m22-m12*m20)+m02*(m12*m21-m11*m20);
+    double det =    m00*(m11*m22-m21*m12)-
+                    m01*(m10*m22-m12*m20)+
+                    m02*(m10*m21-m11*m20);
     if (det == 0) {
         std::cout << "no inverse" << std::endl;
         return DMatrix();
@@ -116,28 +118,28 @@ DMatrix DMatrix::scale(double s) {
 }
 
 DMatrix DMatrix::toNormal() {
-    return DMatrix(this->toVector().toNormal())*this->getRotation();
-//    DMatrix normal = *this;
-//    DVector v = this->toVector().toNormal();
-////    c^2-d^2a^2-d^2b^2 = -1;
-////    c^2+1 = d^2(a^2+b^2);
-////    (c^2+1)/(a^2-b^2)=d^2
-//    double s = sqrt((v[0]*v[0]+1)/(mat[0][0]*mat[0][0]+mat[0][1]*mat[0][1]));
-//    s=s!=s?1:s;
-//    normal[0][0] = mat[0][0]*s;
-//    normal[0][1] = mat[0][1]*s;
-//    normal[0][2] = v[0];
-//    s = sqrt((v[1]*v[1]+1)/(mat[1][0]*mat[1][0]+mat[1][1]*mat[1][1]));
-//    s=s!=s?1:s;
-//    normal[1][0] = mat[1][0]*s;
-//    normal[1][1] = mat[1][1]*s;
-//    normal[1][2] = v[1];
-//    s = sqrt((v[2]*v[2]-1)/(mat[2][0]*mat[2][0]+mat[2][1]*mat[2][1]));
-//    s=s!=s?1:s;
-//    normal[2][0] = mat[2][0]*s;
-//    normal[2][1] = mat[2][1]*s;
-//    normal[2][2] = v[2];
-//    return normal;
+//    return this->getRotation()*DMatrix(this->getBotRow().toNormal());
+    DMatrix normal = *this;
+    DVector v = this->toVector().toNormal();
+//    c^2-d^2a^2-d^2b^2 = -1;
+//    c^2+1 = d^2(a^2+b^2);
+//    (c^2+1)/(a^2-b^2)=d^2
+    double s = sqrt((v[0]*v[0]+1)/(mat[0][0]*mat[0][0]+mat[0][1]*mat[0][1]));
+    s=s!=s?1:s;
+    normal[0][0] = mat[0][0]*s;
+    normal[0][1] = mat[0][1]*s;
+    normal[0][2] = v[0];
+    s = sqrt((v[1]*v[1]+1)/(mat[1][0]*mat[1][0]+mat[1][1]*mat[1][1]));
+    s=s!=s?1:s;
+    normal[1][0] = mat[1][0]*s;
+    normal[1][1] = mat[1][1]*s;
+    normal[1][2] = v[1];
+    s = sqrt((v[2]*v[2]-1)/(mat[2][0]*mat[2][0]+mat[2][1]*mat[2][1]));
+    s=s!=s?1:s;
+    normal[2][0] = mat[2][0]*s;
+    normal[2][1] = mat[2][1]*s;
+    normal[2][2] = v[2];
+    return normal;
 }
 
 void DMatrix::normalize() {
@@ -163,8 +165,23 @@ DVector DMatrix::toVector() {
     return DVector(this->mat[0][2], this->mat[1][2], this->mat[2][2]);
 }
 
+DVector DMatrix::getBotRow() {
+    return DVector(this->mat[2][0], this->mat[2][1], this->mat[2][2]);
+}
+
 DMatrix DMatrix::getRotation() {
-    return DMatrix(this->toVector().toNormal()).inverse()**this;
+    DMatrix retVal = *this*(DMatrix(this->getBotRow().toNormal()).inverse());
+    double h = hypot(retVal[0][0], retVal[0][1]);
+    retVal[0][0] = retVal[0][0]/h;
+    retVal[0][1] = retVal[0][1]/h;
+    retVal[1][0] = -retVal[0][1];
+    retVal[1][1] = retVal[0][0];
+    retVal[0][2] = 0;
+    retVal[1][2] = 0;
+    retVal[2][2] = 1;
+    retVal[2][0] = 0;
+    retVal[2][1] = 0;
+    return retVal;
 }
 
 double DMatrix::distance(DMatrix m) {

@@ -251,38 +251,68 @@ int main(int argc, char * argv[]) {
     v[2] = DVector(z,-z,w);
     v[3] = DVector(-z,-z,w);
     
-    for (int i = 0; i < 4; i++) {
-        platforms.push_back(new Platform());
-        platforms.back()->floor = true;
-    }
-    platforms[0]->position.cell.left();
-    platforms[2]->position.cell.right();
-    platforms[3]->position.cell.right();
-    platforms[3]->position.cell.down();
-    
-    for (int i = 0; i < 4; i++) {
-        platforms[i]->start = v[3];
-        platforms[i]->end = v[2];
-    }
-    
     DVector v1 = DVector().hlerp(HMatrix::leftMatrix().toDouble().toVector(), 0.25);
     DVector v2 = DVector().hlerp(HMatrix::rightMatrix().toDouble().toVector(), 0.25);
-    DVector v3 = v[3].hlerp(v[2], 0.25);
-    DVector v4 = v[3].hlerp(v[2], 0.75);
+    DVector v3 = v[0].hlerp(v[1], 0.25);
+    DVector v4 = v[0].hlerp(v[1], 0.75);
     
     for (int i = 0; i < 3; i++) {
         platforms.push_back(new Platform(DVector(), DVector(), 0, 1, 0));
         platforms.back()->position.cell.right();
     }
-    platforms[4]->start = v1;
-    platforms[4]->end = v2;
-    platforms[4]->floor = true;
-    platforms[5]->start = v1;
-    platforms[5]->end = v3;
-    platforms[6]->start = v2;
-    platforms[6]->end = v4;
+    platforms[0]->start = v3;
+    platforms[0]->end = v4;
+    platforms[0]->floor = true;
+    platforms[1]->start = v1;
+    platforms[1]->end = v3;
+    platforms[2]->start = v2;
+    platforms[2]->end = v4;
     
-//    platforms.push_back(new Platform(DVector(), (DMatrix::translateMatY(tileLen/2)*DMatrix::translateMatX(-tileLen/2)).toVector(), 0, 1, 0));
+    for (int i = 0; i < 3; i++) {
+        platforms.push_back(new Platform());
+        platforms.back()->floor = true;
+    }
+    platforms[4]->position.cell.left();
+    platforms[5]->position.cell.right();
+//    platforms[5]->position.cell.down();
+//    platforms[6]->position.cell.right();
+//    platforms[6]->position.cell.right();
+//    platforms[7]->position.cell.left();
+//    platforms[7]->position.cell.down();
+//    platforms[8]->position.cell.left();
+//    platforms[8]->position.cell.left();
+//    platforms[9]->position.cell.down();
+//    platforms[9]->position.cell.down();
+//    platforms[10]->position.cell.up();
+//    platforms[11]->position.cell.left();
+//    platforms[11]->position.cell.up();
+//    platforms[12]->position.cell.left();
+//    platforms[12]->position.cell.left();
+//    platforms[12]->position.cell.up();
+//    platforms[13]->position.cell.right();
+//    platforms[13]->position.cell.up();
+//    platforms[14]->position.cell.right();
+//    platforms[14]->position.cell.right();
+//    platforms[14]->position.cell.up();
+//    platforms[15]->position.cell.right();
+//    platforms[15]->position.cell.down();
+//    platforms[16]->position.cell.down();
+//    platforms[16]->position.cell.down();
+//    platforms[17]->position.cell.down();
+//    platforms[17]->position.cell.down();
+//    platforms[18]->position.cell.left();
+//    platforms[18]->position.cell.down();
+//
+//    for (int i = 3; i < 6; i++) {
+//        platforms[i]->start = v[3];
+//        platforms[i]->end = v[2];
+//    }
+//
+//    for (int i = 15; i < platforms.size(); i++) {
+//        platforms[i]->start = v[1];
+//        platforms[i]->end = v[2];
+//    }
+    
     
     for (int i = 0; i < platforms.size(); i++) {
         platforms[i]->initBounds();
@@ -300,6 +330,8 @@ int main(int argc, char * argv[]) {
 //    }
     msLastAnimated = getTime();
 //    HObject::scale = 300;
+
+//    return 0;
     glutMainLoop();
     
 }
@@ -333,6 +365,10 @@ void animate(int value) {
                 dude.velocityX = 0;
             }
         }
+        if (std::abs(dude.position.offset[2][2]*dude.position.offset[2][2]-dude.position.offset[0][2]*dude.position.offset[0][2]-dude.position.offset[1][2]*dude.position.offset[1][2]) > 2) {
+            dude.velocityX = 0;
+            dude.velocityY = 0;
+        }
         if (gravityOn && !overlapping) {
             dude.velocityY-=tileLen/6000;
         }
@@ -362,7 +398,7 @@ void display()
         for (int i = 0; i < 13; i++) {
             objects[i]->drawCenter(c);
             objects[i]->drawBorder(c);
-            objects[i]->drawLine(c, DMatrix(), DMatrix().toVector().midpoint(HMatrix().up().toDouble().toVector()), 50);
+            objects[i]->drawLine(c, DMatrix(), DMatrix().toVector().midpoint(HMatrix().up()->toDouble().toVector()), 50);
         }
     } else {
         for (int i = 0; i < platforms.size(); i++) {
@@ -383,9 +419,9 @@ void display()
     DMatrix right(v[2], 0, v[1], 0, 1, 0, v[1], 0, v[2]);
     glColor3d(0, 1, 1);
     glPointSize(7);
-    dude.drawPoint(c, dude.position.offset.inverse());
+//    dude.drawPoint(c, dude.position.offset.inverse());
     glPointSize(3);
-    dude.drawCenter(c);
+//    dude.drawCenter(c);
     dude.drawLine(c, DMatrix(), up, 1);
     dude.drawLine(c, DMatrix(), right, 1);
     dude.drawLine(c, up, right, 1);
@@ -438,10 +474,10 @@ void processKeyboard(unsigned char key, int xx, int yy) {
             break;
         case 'w': // move object up d/5 units
             if (dude.grounded) {
-                dude.velocityY = tileLen/105;
+                dude.velocityY = tileLen/90;
                 dude.grounded = false;
             } else if (!dude.hasJumped) {
-                dude.velocityY = tileLen/105;
+                dude.velocityY = tileLen/90;
                 dude.hasJumped = true;
             }
 //            dude.frozen = false;

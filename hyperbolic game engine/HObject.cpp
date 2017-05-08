@@ -16,6 +16,9 @@ HObject::HObject() {
 
 double* HObject::getScreenLocation(Camera camera, DMatrix m) {
     HMatrix ht = camera.position.cell.inverse()*position.cell;
+    if (camera.position.cell[2][2][0] > 100000000) {
+        std::cout << "big integers" << std::endl;
+    }
     DVector result = (camera.position.offset.inverse()*ht.toDouble()*position.offset*m).toVector();
     // change projection here
     double* xy;
@@ -116,12 +119,12 @@ void HObject::update() {
         position.offset*=DMatrix::translateMatY(velocityY);
         position.offset*=DMatrix::translateMatX(velocityX);
         DMatrix after = position.offset;
-//        position.offset.normalize();
+        position.offset.normalize();
         if (position.offset[0][0]!=position.offset[0][0]) {
             prev.print();
             after.print();
             std::cout << "in update" << std::endl;
-            throw std::exception();
+//            throw std::exception();
         }
 //        position.offset.print();
         position.normalize();

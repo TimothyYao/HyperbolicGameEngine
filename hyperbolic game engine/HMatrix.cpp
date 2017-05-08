@@ -120,32 +120,30 @@ void HMatrix::translateLeft() {
     }
 }
 
-HMatrix HMatrix::up() {
+HMatrix* HMatrix::up() {
     this->translateUp();
-    return *this;
+    return this;
 }
 
-HMatrix HMatrix::down() {
+HMatrix* HMatrix::down() {
     this->translateDown();
-    return *this;
+    return this;
 }
 
-HMatrix HMatrix::right() {
+HMatrix* HMatrix::right() {
     this->translateRight();
-    return *this;
+    return this;
 }
 
-HMatrix HMatrix::left() {
+HMatrix* HMatrix::left() {
     this->translateLeft();
-    return *this;
+    return this;
 }
 
 HMatrix HMatrix::rotateCC() {
     HPoint u(1, 0, 0, 0);
     HPoint o;
     HPoint nu(-1, 0, 0, 0);
-    HPoint x = mat[0][2];
-    HPoint y = mat[1][2];
     HMatrix rm;
     rm[0][0] = o;
     rm[0][1] = u;

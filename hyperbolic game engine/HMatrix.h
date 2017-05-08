@@ -28,10 +28,10 @@ struct HMatrix {
     void translateRight();
     void translateLeft();
     
-    HMatrix up();
-    HMatrix down();
-    HMatrix left();
-    HMatrix right();
+    HMatrix* up();
+    HMatrix* down();
+    HMatrix* left();
+    HMatrix* right();
     
     HMatrix rotateCW();
     HMatrix rotateCC();

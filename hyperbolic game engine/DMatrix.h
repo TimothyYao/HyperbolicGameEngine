@@ -21,6 +21,7 @@ struct DMatrix {
     void normalize();
     
     DVector toVector();
+    DVector getBotRow();
     DMatrix getRotation();
     double distance(DMatrix m);
     
